@@ -43,34 +43,30 @@ class Login extends Component {
         this.setState({usernameValue: event.target.value})
     }
 
+    // Checks to see if string is valid email address
+    validateEmail = (email) => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
     // Handle create account button clicked
     createAccount = (event) => {
-        if (this.state.firstNameValue === "") {
-            this.setState({errorText: "First name is badly formatted."});
+        if (this.state.emailAddressValue === "" && this.validateEmail(this.state.emailAddressValue)) {
+            this.setState({errorText: "Email address is poorly formatted"});
             return;
         }
-        if (this.state.lastNameValue === "") {
-            this.setState({errorText: "Last name is badly formatted."});
-            return;
-        }
-        if (this.state.usernameValue === "") {
-            this.setState({errorText: "Username is badly formatted"});
+        if (this.state.passwordValue === "") {
+            this.setState({errorText: "Password is poorly formatted"});
             return;
         }
         auth.createUserWithEmailAndPassword(this.state.emailAddressValue, this.state.passwordValue)
         .then((user) => {
             const dataUser = {
                 uid: user.uid,
-                email: this.state.emailAddressValue,
-                firstName: this.state.firstNameValue,
-                lastName: this.state.lastNameValue,
-                username: this.state.usernameValue
+                email: this.state.emailAddressValue
             }
             this.initializeUser(dataUser);
             this.props.setUser(dataUser);
-            this.props.setSignedIn(true);
-            localStorage.setItem("user", JSON.stringify(dataUser));
-            localStorage.setItem("signedIn", true);
             this.props.goToUrl("/");
         })
         .catch((error) => {
@@ -93,6 +89,10 @@ class Login extends Component {
                 onChange={this.changeEmailAddress} value={this.emailAddressValue} />
                 <input type="text" placeholder="Password" 
                 onChange={this.changePassword} value={this.passwordValue} />
+                <div>
+                    <button onClick={this.createAccount}>Sign up</button>
+                    <button>Log in</button>
+                </div>
             </div>
         )
     }
