@@ -21,7 +21,7 @@ class App extends Component {
         if (user) {
             //Signed in
             this.setState({signedIn: true})
-            this.goToUrl("/Home")
+            this.goToUrl("/home")
             console.log("Signed in!")
         } else {
             //Not signed in
