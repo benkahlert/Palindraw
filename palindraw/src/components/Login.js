@@ -14,16 +14,6 @@ class Login extends Component {
         }
     }
 
-    // On first name change
-    changeFirstName = (event) => {
-        this.setState({firstNameValue: event.target.value});
-    }
-
-    // On last name change
-    changeLastName = (event) => {
-        this.setState({lastNameValue: event.target.value});
-    }
-
     // On email address change
     changeEmailAddress = (event) => {
         this.setState({emailAddressValue: event.target.value});
@@ -32,11 +22,6 @@ class Login extends Component {
     // On password change
     changePassword = (event) => {
         this.setState({passwordValue: event.target.value});
-    }
-
-    // On username change
-    changeUsername = (event) => {
-        this.setState({usernameValue: event.target.value})
     }
 
     // Checks to see if string is valid email address
@@ -61,20 +46,18 @@ class Login extends Component {
                 uid: user.uid,
                 email: this.state.emailAddressValue
             }
-            this.initializeUser(dataUser);
-            this.props.setUser(dataUser);
-            this.props.goToUrl("/");
+            base.post(`users/${user.uid}`, {
+                data: dataUser
+            })
         })
         .catch((error) => {
+            console.log(error.message)
             this.setState({errorText: error.message});
         });
     }
 
-    // Initializes user in firebase
-    initializeUser = (user) => {
-        base.post(`users/${user.uid}`, {
-            data: user
-        });
+    logIn = (event) => {
+        auth.signInWithEmailAndPassword(this.state.emailAddressValue, this.state.passwordValue)
     }
 
     // Mandatory render method
@@ -87,7 +70,7 @@ class Login extends Component {
                 onChange={this.changePassword} value={this.passwordValue} />
                 <div>
                     <button onClick={this.createAccount}>Sign up</button>
-                    <button>Log in</button>
+                    <button onClick={this.logIn}>Log in</button>
                 </div>
             </div>
         )

@@ -8,14 +8,24 @@ class Login extends Component {
     constructor() {
         super()
         this.state = {
+
         }
+    }
+
+    draw = () => {
+        this.props.goToUrl("/draw")
+    }
+
+    signOut = () => {
+        auth.signOut()
     }
 
     // Mandatory render method
     render() {
         return (
             <div>
-                Hello!!!
+                <button onClick={this.draw}>DRAW</button>
+                <button onClick={this.signOut}>Sign out</button>
             </div>
         )
     }
