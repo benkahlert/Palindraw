@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import base, { auth } from "../re-base.js"
+import { auth } from "../re-base.js"
 import "../css/Home.css"
 
-class Login extends Component {
+class Home extends Component {
 
     // Constructor
     constructor() {
@@ -31,4 +31,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Home

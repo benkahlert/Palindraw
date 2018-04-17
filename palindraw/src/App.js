@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
-import { Route, Switch, Redirect } from "react-router-dom"
-import base, { auth } from "./re-base.js"
+import { Route, Switch } from "react-router-dom"
+import { auth } from "./re-base.js"
 import Login from "./components/Login.js"
 import Home from "./components/Home.js"
 
