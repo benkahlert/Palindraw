@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
+import { Route, Switch, Redirect } from "react-router-dom"
 import base, { auth } from "./re-base.js"
 import Login from "./components/Login.js"
+import Home from "./components/Home.js"
 
 class App extends Component {
 
@@ -20,6 +22,7 @@ class App extends Component {
         if (user) {
             //Signed in
             this.setState({signedIn: true});
+            this.goToUrl("/Home")
             console.log("Signed in!")
         } else {
             //Not signed in
@@ -49,9 +52,15 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <Login {...general} />
-      </div>
+      <Switch>
+        <Route path="/" render={() => {
+          if (!this.state.signedIn) {
+            return <Login {...general} />
+          } else {
+            return <Home {...general} />
+          }
+        }}/>
+      </Switch>
     );
   }
 }

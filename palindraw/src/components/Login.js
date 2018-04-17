@@ -1,4 +1,3 @@
-
 import React, { Component } from "react"
 import base, { auth } from "../re-base.js"
 import "../css/Login.css"
@@ -6,14 +5,11 @@ import "../css/Login.css"
 class Login extends Component {
 
     // Constructor
-    constructor(props) {
-        super(props);
+    constructor() {
+        super()
         this.state = {
-            firstNameValue: "",
-            lastNameValue: "",
             emailAddressValue: "",
             passwordValue: "",
-            usernameValue: "",
             errorText: "",
         }
     }
