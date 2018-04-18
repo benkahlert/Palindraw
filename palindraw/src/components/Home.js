@@ -31,7 +31,7 @@ class Home extends Component {
                     })
                 } else {
                     // Someone is waiting
-                    
+                    this.props.goToUrl("/draw")
                 }
             }
         })
@@ -43,10 +43,17 @@ class Home extends Component {
 
     // Mandatory render method
     render() {
+
+        const general = {
+            getAppState: this.props.getAppState,
+            setAppState: this.props.setAppState,
+            goToUrl: this.props.goToUrl
+        }
+
         return (
             <div>
                 <Switch>
-                    <Route path="/home" render={() => {
+                    <Route exact path="/home" render={() => {
                         return (
                             <div>
                                 <button onClick={this.draw}>DRAW</button>
@@ -54,13 +61,12 @@ class Home extends Component {
                             </div>
                         )
                     }}/>
-                    <Route path="/waiting" render={() => {
-                        return <Waiting />
+                    <Route exact path="/waiting" render={() => {
+                        return <Waiting {...general} />
                     }}/>
-                    <Route path="/draw" render={() => {
+                    <Route exact path="/draw" render={() => {
                         return <Draw />
                     }}/>
-                    <Route render={() => <Redirect to="/home" />} />
                 </Switch>
             </div>
         )

@@ -25,8 +25,10 @@ class App extends Component {
               uid: user.uid,
               email: user.email
             }
+            if (!this.state.signedIn) {
+              this.goToUrl("/home")
+            }
             this.setState({signedIn: true, user: dataUser})
-            this.goToUrl("/home")
             console.log("Signed in!")
         } else {
             //Not signed in
@@ -66,7 +68,6 @@ class App extends Component {
             return <Home {...general} />
           }
         }}/>
-        <Route render={() => <Redirect to="/" />} />
       </Switch>
     );
   }
