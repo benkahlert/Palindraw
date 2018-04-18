@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, Redirect } from "react-router-dom"
 import { auth } from "./re-base.js"
 import Login from "./components/Login.js"
 import Home from "./components/Home.js"
@@ -61,6 +61,7 @@ class App extends Component {
             return <Home {...general} />
           }
         }}/>
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
     );
   }

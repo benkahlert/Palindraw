@@ -102,9 +102,7 @@ class Draw extends Component {
     renderSwatch = (style, active) => {
         return (
             <div data-layout="column" key={style.backgroundColor}>
-                <span data-flex></span>
                 <div onClick={(event) => this.setSwatch(event)} className={active ? "swatch active" : "swatch"} style={style}></div>
-                <span data-flex></span>
             </div>
         );
     }
@@ -115,60 +113,8 @@ class Draw extends Component {
         const colors = ["black", "#e74c3c", "#e67e22", "#f1c40f", "#2ecc71", "#1abc9c", "#3498db", "#9b59b6", "#bdc3c7", "#ffffff"];
 
         return (
-            <div data-flex data-layout="column">
-                {/* <div className="toolbar" data-flex data-layout-gt-sm="row" data-layout="column">
-                    <div data-layout="column">
-                        <span data-flex></span>
-                        <div className="toolbar-title">Pictobucket</div>
-                        <span data-flex></span>
-                    </div>
-                    <span data-flex></span>
-                    <div data-layout="column">
-                        <span data-flex></span>
-                        <div onClick={(event) => this.exit(event)} className="button -regular center submit" data-flex>Exit</div>
-                        <span data-flex></span>
-                    </div>
-                    <div data-layout="column">
-                        <span data-flex></span>
-                        <div onClick={(event) => this.submitDrawing(event)} className="button -regular center submit" data-flex>Submit</div>
-                        <span data-flex></span>
-                    </div>
-                    <span data-flex></span>
-                    <div data-layout="column">
-                        <span data-flex></span>
-                        <div onClick={(event) => this.undo(event)} className="button -regular center undo" data-flex><span className="material-icons">undo</span></div>
-                        <span data-flex></span>
-                    </div>
-                    <span data-flex></span>
-                    <div data-layout="row">
-                        <div data-layout="column">
-                            <span data-flex></span>
-                            <div className="radius-value" data-flex>Radius: {this.state.radius}</div>
-                            <span data-flex></span>
-                        </div>
-                        <div className="toolbar-radius" data-layout="column">
-                            <span data-flex></span>
-                            <div onClick={(event) => this.setRadius(event, this.state.radius - 1)} className="button -regular center" data-flex>-</div>
-                            <span data-flex></span>
-                        </div>
-                        <div className="toolbar-radius" data-layout="column">
-                            <span data-flex></span>
-                            <div onClick={(event) => this.setRadius(event, this.state.radius + 1)}  className="button -regular center" data-flex>+</div>
-                            <span data-flex></span>
-                        </div>
-                    </div>
-                    <span data-flex="5"></span>
-                    <div data-layout="row">
-                        {colors.map((color) => {
-                            let boolean = true;
-                            if (color !== "black")
-                                boolean = false;
-                            return (this.renderSwatch({backgroundColor: color}, boolean));
-                        })}
-                    </div>
-                </div> */}
+            <div>
                 <canvas 
-                data-flex
                 onMouseDown={(event) => this.setDragging(event, true)}
                 onMouseUp={(event) => this.setDragging(event, false)}
                 onMouseMove={(event) => this.putPoint(event, false)}
