@@ -20,12 +20,17 @@ class App extends Component {
     auth.onAuthStateChanged((user) => {
         if (user) {
             //Signed in
-            this.setState({signedIn: true})
+            console.log(user)
+            const dataUser = {
+              uid: user.uid,
+              email: user.email
+            }
+            this.setState({signedIn: true, user: dataUser})
             this.goToUrl("/home")
             console.log("Signed in!")
         } else {
             //Not signed in
-            this.setState({signedIn: false})
+            this.setState({signedIn: false, user: { }})
             this.goToUrl("/")
             console.log("Signed out!")
         }
