@@ -12,11 +12,14 @@ class Draw extends Component {
             dragging: false,
             radius: 3,
             color: "black",
-            canvasSize: 500
+            canvasSize: 500,
+            timer: 30.0,
+            timerId: undefined,
+            
         }
     }
 
-    // Sets up canvas and updates state
+    // Sets up canvas, timer and updates state
     componentDidMount = () => {
         this.refs.canvas.width = window.innerWidth
         this.refs.canvas.height = window.innerHeight
@@ -29,6 +32,27 @@ class Draw extends Component {
             if (this.refs.canvas) 
                 this.resetCanvas()
         }
+
+        const timerId = setInterval(this.countdown, 100)
+        this.setState({"timerId": timerId})
+    }
+
+    // Function called at an interval for the timer
+    countdown = () => {
+        if (this.state.timerId !== undefined) {
+            if (this.state.timer === 0) {
+                clearTimeout(this.state.timerId)
+                console.log("Done!")
+            } else {
+                this.setState({timer: this.precisionRound(this.state.timer - .1, 1)})
+            }
+        }
+    }
+
+    // Formats timer for display
+    precisionRound = (number, precision) => {
+        const factor = Math.pow(10, precision);
+        return Math.round(number * factor) / factor;
     }
 
     // Puts a dot at where mouse is
@@ -114,6 +138,7 @@ class Draw extends Component {
 
         return (
             <div>
+                <div className="timer">{this.state.timer}</div>
                 <canvas 
                 onMouseDown={(event) => this.setDragging(event, true)}
                 onMouseUp={(event) => this.setDragging(event, false)}
