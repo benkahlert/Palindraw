@@ -63,15 +63,21 @@ class Login extends Component {
     // Mandatory render method
     render() {
         return (
-            <div>
-                <input type="text" placeholder="Email address" 
-                onChange={this.changeEmailAddress} value={this.emailAddressValue} />
-                <input type="password" placeholder="Password" 
-                onChange={this.changePassword} value={this.passwordValue} />
-                <div>
-                    <button onClick={this.createAccount}>Sign up</button>
-                    <button onClick={this.logIn}>Log in</button>
+            <div id="containerDiv" style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{display: 'flex', flexDirection: 'column', width: '300px', justifyContent: 'center'}}>
+                    <center><p className="title_text">Palindraw</p></center>
+                    <input className="text_input" type="text" placeholder="Email address"
+                    onChange={this.changeEmailAddress} value={this.emailAddressValue} />
+                    <input className="text_input" type="password" placeholder="Password"
+                    onChange={this.changePassword} value={this.passwordValue} />
+                    <div>
+                        <center>
+                            <button className="button" onClick={this.createAccount}>Sign up</button>
+                            <button className="button" onClick={this.logIn}>Log in</button>
+                        </center>
+                    </div>
                 </div>
+
             </div>
         )
     }
