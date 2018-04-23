@@ -63,6 +63,8 @@ class Home extends Component {
             goToUrl: this.props.goToUrl
         }
 
+        console.log(this.props.getAppState())
+
         return (
             <div>
                 <Switch>
@@ -73,13 +75,13 @@ class Home extends Component {
                                     <div className="contentContainer" id="titleBarContent">
                                         <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
                                         <div className="row" id="titleRightInfo">
-                                            <p className="text_description" id="titleBarName">Person's Name</p>
+                                            <p className="text_description" id="titleBarName">{this.props.getAppState().user.email}</p>
                                             <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
                                             <div className="statsBox">
-                                                <p className="statsInfo">🎉 6</p>
+                                                <p className="statsInfo">🎉 {this.props.getAppState().user.numWins}</p>
                                             </div>
                                             <div className="statsBox">
-                                                <p className="statsInfo">😔 3</p>
+                                                <p className="statsInfo">😔 {this.props.getAppState().user.numLosses}</p>
                                             </div>
                                             <button className="button" id="signOutButton" onClick={this.signOut}>Sign out</button>
                                         </div>

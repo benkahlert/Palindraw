@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 
 import { Route, Switch, Redirect } from "react-router-dom"
-import { auth } from "./re-base.js"
+import rebase, { auth } from "./re-base.js"
 import Login from "./components/Login.js"
 import Home from "./components/Home.js"
 
@@ -27,6 +27,13 @@ class App extends Component {
               uid: user.uid,
               email: user.email
             }
+            this.bindingref = rebase.syncState(`users/${user.uid}`, {
+              context: this,
+              state: 'user',
+              then: () => {
+                console.log(this.state.user)
+              }
+            })
             if (!this.state.signedIn) {
               this.goToUrl("/home")
             }
@@ -35,6 +42,9 @@ class App extends Component {
         } else {
             //Not signed in
             this.setState({signedIn: false, user: { }})
+            if (this.bindingref) {
+              rebase.removeBinding(this.bindingref)
+            }
             this.goToUrl("/")
             console.log("Signed out!")
         }

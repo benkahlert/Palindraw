@@ -44,7 +44,9 @@ class Login extends Component {
         .then((user) => {
             const dataUser = {
                 uid: user.uid,
-                email: this.state.emailAddressValue
+                email: this.state.emailAddressValue,
+                numWins: 0,
+                numLosses: 0
             }
             base.post(`users/${user.uid}`, {
                 data: dataUser
