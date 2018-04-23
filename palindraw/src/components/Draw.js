@@ -21,8 +21,8 @@ class Draw extends Component {
 
     // Sets up canvas, timer and updates state
     componentDidMount = () => {
-        this.refs.canvas.width = window.innerWidth
-        this.refs.canvas.height = window.innerHeight
+        this.refs.canvas.width = this.state.canvasSize
+        this.refs.canvas.height = this.state.canvasSize
         this.setState({context: this.refs.canvas.getContext("2d"), canDraw: true}, () => {
             const stateCopy = { ...this.state }
             stateCopy.context.lineWidth = 2 * this.state.radius
@@ -107,7 +107,10 @@ class Draw extends Component {
         })
         const post = {
             firstImage: data,
-            secondImage: this.refs.canvas.toDataURL()
+            secondImage: this.refs.canvas.toDataURL(),
+            secondUid: this.props.getAppState().user.uid,
+            secondEmail: this.props.getAppState().user.email,
+            word: this.props.getAppState().word
         }
         rebase.push(`/posts`, {
             data: post
@@ -191,8 +194,8 @@ class Draw extends Component {
     // Called when window is resized
     resetCanvas = () => {
         const imageData = this.state.context.getImageData(0, 0, this.refs.canvas.width, this.refs.canvas.height)
-        this.refs.canvas.width = window.innerWidth
-        this.refs.canvas.height = window.innerHeight
+        this.refs.canvas.width = this.state.canvasSize
+        this.refs.canvas.height = this.state.canvasSize
         const stateCopy = { ...this.state }
         stateCopy.context.lineWidth = 2 * this.state.radius
         stateCopy.context.fillStyle = this.state.color
@@ -223,7 +226,8 @@ class Draw extends Component {
                 onMouseDown={(event) => this.setDragging(event, true)}
                 onMouseUp={(event) => this.setDragging(event, false)}
                 onMouseMove={(event) => this.putPoint(event, false)}
-                ref="canvas">Sorry, your browser doesn't support html canvas!</canvas>
+                ref="canvas"
+                style={{border: "2px solid black"}}>Sorry, your browser doesn't support html canvas!</canvas>
             </div>
         )
     }
