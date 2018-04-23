@@ -72,12 +72,15 @@ class Home extends Component {
                                 <div id="titleBar">
                                     <div className="contentContainer" id="titleBarContent">
                                         <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
-                                        <div className="row">
+                                        <div className="row" id="titleRightInfo">
+                                            <p className="text_description" id="titleBarName">Person's Name</p>
                                             <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
                                             <div className="statsBox">
-
+                                                <p className="statsInfo">🎉 6</p>
                                             </div>
-                                            <p className="text_description">Person's Name</p>
+                                            <div className="statsBox">
+                                                <p className="statsInfo">😔 3</p>
+                                            </div>
                                             <button className="button" id="signOutButton" onClick={this.signOut}>Sign out</button>
                                         </div>
                                     </div>
