@@ -12,7 +12,9 @@ class App extends Component {
     super()
     this.state = { 
       user: { },
-      signedIn: false
+      signedIn: false,
+      inGame: false,
+      opponentId: "NA"
     }
   }
 

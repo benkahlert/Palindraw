@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import rebase, { auth } from "../re-base.js"
 import { Route, Switch, Redirect } from "react-router-dom"
 import Waiting from "./Waiting"
+import Gallery from "./Gallery"
 import Draw from "./Draw"
 import "../css/Home.css"
 
@@ -19,9 +20,9 @@ class Home extends Component {
         // this.props.goToUrl("/draw")
         rebase.fetch(`/queue`, {
             context: this,
-            asArray: true,
             then: (data) => {
-                if (data.length == 1) {
+                const dataArray = Object.keys(data)
+                if (dataArray.length == 1) {
                     // Nothing in queue
                     rebase.post(`/queue/${this.props.getAppState().user.uid}`, {
                         data: true,
@@ -31,6 +32,18 @@ class Home extends Component {
                     })
                 } else {
                     // Someone is waiting
+                    const keys = Object.keys(data)
+                    let key = keys[0]
+                    if (keys[0] === "example") {
+                        key = keys[1]
+                    }
+                    rebase.remove(`/queue/${key}`, (error) => {
+                        if (error !== null) {
+                            console.log(error)
+                        }
+                    })
+                    this.props.setAppState({inGame: true})
+                    this.props.setAppState({opponentId: key})
                     this.props.goToUrl("/draw")
                 }
             }
@@ -56,16 +69,18 @@ class Home extends Component {
                     <Route exact path="/home" render={() => {
                         return (
                             <div>
+
                                 <button onClick={this.draw}>DRAW</button>
+                                <Gallery />
                                 <button onClick={this.signOut}>Sign out</button>
                             </div>
                         )
                     }}/>
                     <Route exact path="/waiting" render={() => {
-                        return <Waiting {...general} />
+                        return <Waiting { ...general } />
                     }}/>
                     <Route exact path="/draw" render={() => {
-                        return <Draw />
+                        return <Draw { ...general } />
                     }}/>
                 </Switch>
             </div>

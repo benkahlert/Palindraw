@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import base from "../re-base.js"
+import rebase from "../re-base.js"
 import "../css/Draw.css"
 
 class Draw extends Component {
@@ -13,9 +13,9 @@ class Draw extends Component {
             radius: 3,
             color: "black",
             canvasSize: 500,
-            timer: 30.0,
+            timer: 5.0,
             timerId: undefined,
-            
+            done: false
         }
     }
 
@@ -29,20 +29,99 @@ class Draw extends Component {
             this.setState(stateCopy)
         })
         window.onresize = () => {
-            if (this.refs.canvas) 
+            if (this.refs.canvas) {
                 this.resetCanvas()
+            }
         }
 
         const timerId = setInterval(this.countdown, 100)
         this.setState({"timerId": timerId})
+        
+        if (this.props.getAppState().opponentId === "NA") {
+            rebase.listenTo(`/pictureQueue/${this.props.getAppState().user.uid}`, {
+                context: this,
+                then: (data) => {
+                    if (!this.isEmpty(data) && this.state.done) {
+                        // Both are done
+                        console.log(data)
+                        this.completePost(data)
+                    }
+                }
+            })
+        }
+    }
+
+    // Function called when timer is done
+    // Posts in image queue if user is not host
+    // If user is host, waits until image is posted and then completes the post
+    done = () => {
+        if (this.props.getAppState().opponentId !== "NA") {
+            rebase.post(`/pictureQueue/${this.props.getAppState().opponentId}`, {
+                data: this.refs.canvas.toDataURL(),
+                then: (data) => {
+                    console.log("Image posted!")
+                    this.setState({done: true})
+                    rebase.listenTo(`/pictureQueue/${this.props.getAppState().opponentId}`, {
+                        context: this,
+                        then: (data) => {
+                            if (this.isEmpty(data)) {
+                                // Post has been created
+                                this.props.setAppState({inGame: false})
+                                this.props.goToUrl("/home")
+                            }
+                        }
+                    })
+                }
+            })
+        } else {
+            this.setState({done: true})
+            rebase.fetch(`/pictureQueue/${this.props.getAppState().user.uid}`, {
+                context: this,
+                then: (data) => {
+                    if (!this.isEmpty(data)) {
+                        // Both are done
+                        console.log(data)
+                        this.completePost(data)
+                    }
+                }
+            })
+        }
+    }
+
+    // Checks to see if an object is empty
+    isEmpty = (obj) => {
+        for (let key in obj) {
+            if(obj.hasOwnProperty(key)) {
+                return false
+            }
+        }
+        return true
+    }
+
+    // Function called for completing the post
+    completePost = (data) => {
+        rebase.remove(`/pictureQueue/${this.props.getAppState().user.uid}`, (error) => {
+            if (error !== null) {
+                console.log(error)
+            }
+        })
+        const post = {
+            firstImage: data,
+            secondImage: this.refs.canvas.toDataURL()
+        }
+        rebase.push(`/posts`, {
+            data: post
+        })
+        this.props.setAppState({inGame: false})
+        this.props.goToUrl("/home")
     }
 
     // Function called at an interval for the timer
     countdown = () => {
         if (this.state.timerId !== undefined) {
             if (this.state.timer === 0) {
+                this.done()
                 clearTimeout(this.state.timerId)
-                console.log("Done!")
             } else {
                 this.setState({timer: this.precisionRound(this.state.timer - .1, 1)})
             }

@@ -14,24 +14,13 @@ class Waiting extends Component {
 
     // Set up timer
     componentWillMount = () => {
-        console.log("Mounting Waiting")
-        const timerId = setInterval(this.ping, 1000)
-        this.setState({"timerId": timerId})
-    }
-
-    // Ping server to see if someone has joined
-    ping = () => {
-        rebase.fetch(`/queue`, {
+        console.log("Mounting waiting")
+        rebase.listenTo(`/queue/${this.props.getAppState().user.uid}`, {
             context: this,
             then: (data) => {
-                const found = data[this.props.getAppState().user.uid]
-                console.log(found)
-                if (found === undefined) {
-                    // Someone wants to play
-                    clearTimeout(this.state.timerId)
+                if (data !== true) {
+                    this.props.setAppState({inGame: true})
                     this.props.goToUrl("/draw")
-                } else {
-                    // Still waiting
                 }
             }
         })
