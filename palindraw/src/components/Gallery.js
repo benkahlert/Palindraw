@@ -25,9 +25,11 @@ class Gallery extends Component {
         const tempStyle = {width: "250px", height: "250px", borderRadius: "50%"}
 
         return (
-            <div>
-                <img src={post.firstImage} style={tempStyle} />
-                <img src={post.secondImage} style={tempStyle} />
+            <div className="post">
+                <center>
+                    <img src={post.firstImage} className="imageStyle" />
+                    <img src={post.secondImage} className="imageStyle" />
+                </center>
             </div>
         )
     }
@@ -38,7 +40,7 @@ class Gallery extends Component {
         const keys = Object.keys(this.state.posts)
 
         return (
-            <div>
+            <div className="contentContainer">
                 {keys.map((key) => {
                     return this.renderPost(this.state.posts[key])
                 })}
