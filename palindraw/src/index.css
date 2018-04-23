@@ -11,6 +11,16 @@ body {
     margin-bottom: 7px;
 }
 
+.text_description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
 #containerDiv {
     width: 95%;
     height: 100%;
@@ -61,4 +71,43 @@ body {
     margin: 8px;
     margin-top: 0px;
     font-weight: bolder;
+}
+
+#titleBar {
+    width: 100%;
+    background-color: #4BACE1;
+    height: 50px;
+    margin-top: 0px;
+    position: fixed;
+}
+
+#titleBarContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contentContainer {
+    width: 95%;
+    margin: auto;
+    margin-top: 0px;
+}
+
+#homescreenLogo {
+    color: white;
+    padding-top: 10px;
+}
+
+#playButton {
+    background-color: #2ECB71;
+    width: 70px;
+    color: white;
+    font-weight: bold;
+    border: 0px solid grey;
+}
+
+#signOutButton {
+    background-color: transparent;
+    color: white;
+    font-size: lighter;
 }

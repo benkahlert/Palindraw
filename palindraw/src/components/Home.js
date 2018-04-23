@@ -69,10 +69,21 @@ class Home extends Component {
                     <Route exact path="/home" render={() => {
                         return (
                             <div>
+                                <div id="titleBar">
+                                    <div className="contentContainer" id="titleBarContent">
+                                        <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
+                                        <div className="row">
+                                            <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
+                                            <div className="statsBox">
 
-                                <button onClick={this.draw}>DRAW</button>
+                                            </div>
+                                            <p className="text_description">Person's Name</p>
+                                            <button className="button" id="signOutButton" onClick={this.signOut}>Sign out</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <Gallery />
-                                <button onClick={this.signOut}>Sign out</button>
                             </div>
                         )
                     }}/>
