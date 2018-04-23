@@ -17,7 +17,10 @@ class Home extends Component {
     }
 
     draw = () => {
-        // this.props.goToUrl("/draw")
+        
+        const words = ['Racecar', 'Kayak', 'Noon']
+        const word = words[Math.floor(Math.random() * words.length)]
+
         rebase.fetch(`/queue`, {
             context: this,
             then: (data) => {
@@ -25,8 +28,9 @@ class Home extends Component {
                 if (dataArray.length == 1) {
                     // Nothing in queue
                     rebase.post(`/queue/${this.props.getAppState().user.uid}`, {
-                        data: true,
+                        data: word,
                         then: () => {
+                            this.props.setAppState({word: word})
                             this.props.goToUrl("/waiting")
                         }
                     })
@@ -43,6 +47,7 @@ class Home extends Component {
                         }
                     })
                     this.props.setAppState({inGame: true})
+                    this.props.setAppState({word: data[key]})
                     this.props.setAppState({opponentId: key})
                     this.props.goToUrl("/draw")
                 }

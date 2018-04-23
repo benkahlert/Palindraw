@@ -18,7 +18,7 @@ class Waiting extends Component {
         rebase.listenTo(`/queue/${this.props.getAppState().user.uid}`, {
             context: this,
             then: (data) => {
-                if (data !== true) {
+                if (data !== this.props.getAppState().word) {
                     this.props.setAppState({inGame: true})
                     this.props.goToUrl("/draw")
                 }

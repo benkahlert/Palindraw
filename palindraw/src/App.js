@@ -14,7 +14,8 @@ class App extends Component {
       user: { },
       signedIn: false,
       inGame: false,
-      opponentId: "NA"
+      opponentId: "NA",
+      word: "NA"
     }
   }
 

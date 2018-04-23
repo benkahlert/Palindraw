@@ -218,7 +218,7 @@ class Draw extends Component {
         return (
             <div>
                 <div className="timer">{this.state.timer}</div>
-                <div className="">{this.state.word}</div>
+                <div className="word">{this.props.getAppState().word}</div>
                 <canvas 
                 onMouseDown={(event) => this.setDragging(event, true)}
                 onMouseUp={(event) => this.setDragging(event, false)}
