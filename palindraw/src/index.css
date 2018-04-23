@@ -45,3 +45,20 @@ body {
     background-color: whitesmoke;
     cursor: pointer;
 }
+
+.centerLogo {
+    text-shadow: 2px 4px #ff00;
+    margin: 0px;
+    width: 240px;
+    height: auto;
+    color: #4A4A4A;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #4A4A4A;
+    text-shadow: 1px 4px #ff00;
+    margin: 8px;
+    margin-top: 0px;
+    font-weight: bolder;
+}

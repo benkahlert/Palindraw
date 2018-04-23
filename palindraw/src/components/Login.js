@@ -66,6 +66,7 @@ class Login extends Component {
             <div id="containerDiv" style={{display: 'flex', justifyContent: 'center'}}>
                 <div style={{display: 'flex', flexDirection: 'column', width: '300px', justifyContent: 'center'}}>
                     <center><p className="title_text">Palindraw</p></center>
+                    <center><div className="subtitle">Practice your Drawing Skills</div></center>
                     <input className="text_input" type="text" placeholder="Email address"
                     onChange={this.changeEmailAddress} value={this.emailAddressValue} />
                     <input className="text_input" type="password" placeholder="Password"
@@ -77,6 +78,7 @@ class Login extends Component {
                         </center>
                     </div>
                 </div>
+
 
             </div>
         )
