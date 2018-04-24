@@ -56,8 +56,13 @@ class Draw extends Component {
     // If user is host, waits until image is posted and then completes the post
     done = () => {
         if (this.props.getAppState().opponentId !== "NA") {
+            const newData = {
+                firstEmail: this.props.getAppState().user.email,
+                firstUid: this.props.getAppState().user.uid,
+                firstImage: this.refs.canvas.toDataURL()
+            }
             rebase.post(`/pictureQueue/${this.props.getAppState().opponentId}`, {
-                data: this.refs.canvas.toDataURL(),
+                data: newData,
                 then: (data) => {
                     console.log("Image posted!")
                     this.setState({done: true})
@@ -106,11 +111,19 @@ class Draw extends Component {
             }
         })
         const post = {
-            firstImage: data,
+            firstImage: data.firstImage,
+            firstUid: data.firstUid,
+            firstEmail: data.firstEmail,
             secondImage: this.refs.canvas.toDataURL(),
             secondUid: this.props.getAppState().user.uid,
             secondEmail: this.props.getAppState().user.email,
-            word: this.props.getAppState().word
+            word: this.props.getAppState().word,
+            firstLikes: {
+                example: "example"
+            },
+            secondLikes: {
+                example: "example"
+            }
         }
         rebase.push(`/posts`, {
             data: post

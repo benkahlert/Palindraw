@@ -93,7 +93,7 @@ class Home extends Component {
                                     </div>
                                 </div>
 
-                                <Gallery />
+                                <Gallery { ...general } />
                             </div>
                         )
                     }}/>

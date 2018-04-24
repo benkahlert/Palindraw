@@ -20,28 +20,44 @@ class Gallery extends Component {
         })
     }
 
-    renderPost = (post) => {
+    renderPost = (post, key) => {
 
         const tempStyle = {width: "250px", height: "250px", borderRadius: "50%"}
+        const firstLikesKeys = Object.keys(post.firstLikes)
+        const secondLikesKeys = Object.keys(post.secondLikes)
 
         return (
-            <div className="post">
+            <div className="post" key={key}>
 
                 <center>
-                    <p className="subtitle" id="galleryPostTitle">Prompt Title</p>
+                    <p className="subtitle" id="galleryPostTitle">{post.word}</p>
                     <div className="row" id="galleryPostVotes">
-                        <p className="text_description" id="galleryVotes" style={{marginLeft: '30px'}}>6 👍🏼</p>
+                        <p className="text_description" id="galleryVotes" style={{marginLeft: '30px'}}>{firstLikesKeys.length - 1} 👍🏼</p>
                         <div className="row">
                             <div>
-                                <img src={post.firstImage} className="imageStyle" />
-                                <p id="text_description" style={{marginTop: '-17px'}}>Drawer's Name</p>
+                                <img onClick={() => {
+                                    const newState = { ...this.state }
+                                    newState.posts[key].firstLikes[this.props.getAppState().user.uid] = true
+                                    if (newState.posts[key].secondLikes[this.props.getAppState().user.uid] === true) {
+                                        delete newState.posts[key].secondLikes[this.props.getAppState().user.uid]
+                                    }
+                                    this.setState(newState)
+                                }} src={post.firstImage} className="imageStyle" />
+                                <p id="text_description" style={{marginTop: '-17px'}}>{post.firstEmail}</p>
                             </div>
                             <div>
-                                <img src={post.secondImage} className="imageStyle" />
-                                <p id="text_description" style={{marginTop: '-17px'}}>Drawer's Name</p>
+                                <img onClick={() => {
+                                    const newState = { ...this.state }
+                                    newState.posts[key].secondLikes[this.props.getAppState().user.uid] = true
+                                    if (newState.posts[key].firstLikes[this.props.getAppState().user.uid] === true) {
+                                        delete newState.posts[key].firstLikes[this.props.getAppState().user.uid]
+                                    }
+                                    this.setState(newState)
+                                }} src={post.secondImage} className="imageStyle" />
+                                <p id="text_description" style={{marginTop: '-17px'}}>{post.secondEmail}</p>
                             </div>
                         </div>
-                        <p className="text_description" id="galleryVotes" style={{marginRight: '30px'}}>👍🏼 3</p>
+                        <p className="text_description" id="galleryVotes" style={{marginRight: '30px'}}>👍🏼 {secondLikesKeys.length - 1}</p>
                     </div>
                 </center>
 
@@ -73,7 +89,7 @@ class Gallery extends Component {
 
                 <div id="imageRoundedDiv">
                     {keys.map((key) => {
-                        return this.renderPost(this.state.posts[key])
+                        return this.renderPost(this.state.posts[key], key)
                     })}
                 </div>
 
