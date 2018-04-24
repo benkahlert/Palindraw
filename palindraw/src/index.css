@@ -80,6 +80,7 @@ body {
     height: 50px;
     margin-top: 0px;
     position: fixed;
+    top: 0px;
 }
 
 #titleBarContent {
@@ -152,12 +153,37 @@ body {
 
 .imageStyle {
     border: 1px solid black;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     margin: 7px;
+    margin-bottom: 20px;
 }
 
 .imageStyle:hover {
     background-color: #B7D7E8;
     cursor: pointer;
+}
+
+#galleryContainer {
+    margin-top: 50px;
+}
+
+#galleryPostTitle {
+    margin-bottom: 0px;
+    font-size: 16pt;
+
+    padding-top: 14px;
+}
+
+.galleryPostLine {
+    width: 100%;
+}
+
+#galleryPostVotes {
+    justify-content: center;
+}
+
+#galleryVotes {
+    padding-top: 100px;
+    font-size: 16px;
 }

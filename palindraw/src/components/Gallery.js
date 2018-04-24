@@ -26,10 +26,21 @@ class Gallery extends Component {
 
         return (
             <div className="post">
+
                 <center>
-                    <img src={post.firstImage} className="imageStyle" />
-                    <img src={post.secondImage} className="imageStyle" />
+                    <p className="subtitle" id="galleryPostTitle">Prompt Title</p>
+                    <div className="row" id="galleryPostVotes">
+                        <p className="text_description" id="galleryVotes" style={{marginLeft: '30px'}}>6 👍🏼</p>
+                        <div>
+                            <img src={post.firstImage} className="imageStyle" />
+                            <img src={post.secondImage} className="imageStyle" />
+                        </div>
+                        <p className="text_description" id="galleryVotes" style={{marginRight: '30px'}}>👍🏼 3</p>
+                    </div>
                 </center>
+
+
+
             </div>
         )
     }
@@ -40,7 +51,8 @@ class Gallery extends Component {
         const keys = Object.keys(this.state.posts)
 
         return (
-            <div className="contentContainer">
+            <div className="contentContainer" id="galleryContainer">
+                <p className="title_text">Voting Gallery</p>
                 {keys.map((key) => {
                     return this.renderPost(this.state.posts[key])
                 })}
