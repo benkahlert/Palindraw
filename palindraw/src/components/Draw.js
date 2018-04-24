@@ -253,9 +253,9 @@ class Draw extends Component {
 
                 <div>
                     {colors.map((color) => {
-                        let boolean = true;
+                        let boolean = true
                         if (color !== "black")
-                            boolean = false;
+                            boolean = false
                         return (this.renderSwatch({backgroundColor: color}, boolean));
                     })}
                 </div>
