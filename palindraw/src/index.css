@@ -224,3 +224,17 @@ body {
 .drawingCanvas {
     margin: auto;
 }
+
+.swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 4px;
+    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, .5) 0px 2px 2px rgba(0, 0, 0, .5);
+    border: 1px solid black;
+}
+
+.active {
+    border: 2px solid white;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+}

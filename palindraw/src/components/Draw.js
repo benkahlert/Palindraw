@@ -220,7 +220,7 @@ class Draw extends Component {
     // Returns a swatch
     renderSwatch = (style, active) => {
         return (
-            <div data-layout="column" key={style.backgroundColor}>
+            <div key={style.backgroundColor}>
                 <div onClick={(event) => this.setSwatch(event)} className={active ? "swatch active" : "swatch"} style={style}></div>
             </div>
         );
@@ -242,13 +242,23 @@ class Draw extends Component {
                     </div>
                 </div>
 
-                    <canvas
+                <canvas
                     onMouseDown={(event) => this.setDragging(event, true)}
                     onMouseUp={(event) => this.setDragging(event, false)}
                     onMouseMove={(event) => this.putPoint(event, false)}
                     ref="canvas"
                     className="drawingCanvas"
-                    style={{border: "2px solid black"}}>Sorry, your browser doesn't support html canvas!</canvas>
+                    style={{border: "2px solid black"}}>Sorry, your browser doesn't support html canvas!
+                </canvas>
+
+                <div>
+                    {colors.map((color) => {
+                        let boolean = true;
+                        if (color !== "black")
+                            boolean = false;
+                        return (this.renderSwatch({backgroundColor: color}, boolean));
+                    })}
+                </div>
 
             </div>
         )

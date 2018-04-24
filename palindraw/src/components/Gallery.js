@@ -102,6 +102,7 @@ class Gallery extends Component {
     render() {
 
         const keys = Object.keys(this.state.posts)
+        keys.reverse()
 
         return (
             <div className="contentContainer" id="galleryContainer">
@@ -124,7 +125,15 @@ class Gallery extends Component {
 
                 <div id="imageRoundedDiv">
                     {keys.map((key) => {
-                        return this.renderPost(this.state.posts[key], key)
+                        if (this.state.recent) {
+                            return this.renderPost(this.state.posts[key], key)
+                        } else {
+                            if (this.state.posts[key].firstUid === this.props.getAppState().user.uid || this.state.posts[key].secondUid === this.props.getAppState().user.uid) {
+                                return this.renderPost(this.state.posts[key], key)
+                            } else {
+                                return <div></div>
+                            }
+                        }
                     })}
                 </div>
 
