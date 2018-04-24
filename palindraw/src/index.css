@@ -203,3 +203,26 @@ body {
 #imageRoundedDiv {
     background-color: white;
 }
+
+#timer {
+    width: 75px;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13pt;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.word {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13pt;
+    color: white;
+    margin-top: 15px;
+}
+
+.drawingCanvas {
+    position: absolute;
+    top: 70px;
+    margin: auto;
+}

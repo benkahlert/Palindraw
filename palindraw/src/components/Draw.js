@@ -36,7 +36,7 @@ class Draw extends Component {
 
         const timerId = setInterval(this.countdown, 100)
         this.setState({"timerId": timerId})
-        
+
         if (this.props.getAppState().opponentId === "NA") {
             rebase.listenTo(`/pictureQueue/${this.props.getAppState().user.uid}`, {
                 context: this,
@@ -176,14 +176,14 @@ class Draw extends Component {
         this.setState(stateCopy);
         // Change this later, not suppesed to do in react
         const active = document.getElementsByClassName("active")[0];
-        if (active) 
-            active.className = "swatch"; 
+        if (active)
+            active.className = "swatch";
         event.target.className += " active";
     }
 
     // Handles submit
     submitDrawing = (event) => {
-        
+
     }
 
     // Goes back
@@ -220,14 +220,23 @@ class Draw extends Component {
 
         return (
             <div>
-                <div className="timer">{this.state.timer}</div>
-                <div className="word">{this.props.getAppState().word}</div>
-                <canvas 
-                onMouseDown={(event) => this.setDragging(event, true)}
-                onMouseUp={(event) => this.setDragging(event, false)}
-                onMouseMove={(event) => this.putPoint(event, false)}
-                ref="canvas"
-                style={{border: "2px solid black"}}>Sorry, your browser doesn't support html canvas!</canvas>
+                <div id="titleBar">
+                    <div className="contentContainer row" id="titleBarContent">
+                        <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
+                        <div className="word">Your Prompt: <b>{this.props.getAppState().word}</b></div>
+                        <div className="row" id="timer" >Time: {this.state.timer}</div>
+
+                    </div>
+                </div>
+
+                    <canvas
+                    onMouseDown={(event) => this.setDragging(event, true)}
+                    onMouseUp={(event) => this.setDragging(event, false)}
+                    onMouseMove={(event) => this.putPoint(event, false)}
+                    ref="canvas"
+                    className="drawingCanvas"
+                    style={{border: "2px solid black"}}>Sorry, your browser doesn't support html canvas!</canvas>
+
             </div>
         )
     }
