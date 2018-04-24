@@ -222,7 +222,5 @@ body {
 }
 
 .drawingCanvas {
-    position: absolute;
-    top: 70px;
     margin: auto;
 }
