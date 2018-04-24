@@ -30,7 +30,14 @@ class Waiting extends Component {
     render() {
         return (
             <div>
-                Waiting
+                <div id="titleBar">
+                    <div className="contentContainer" id="titleBarContent">
+                        <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
+                    </div>
+                </div>
+                <center>
+                    <p className="title_text" style={{marginTop: '70px'}}>Waiting for Another Player</p>
+                </center>
             </div>
         )
     }
