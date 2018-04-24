@@ -56,6 +56,13 @@ class Gallery extends Component {
                                     } else if (newFirstKeys.length === newSecondKeys.length) {
                                         rebase.remove(`/users/${post.secondUid}/numWins/${key}`)
                                         rebase.remove(`/users/${post.firstUid}/numLosses/${key}`)
+                                    } else {
+                                        rebase.post(`/users/${post.secondUid}/numWins/${key}`, {
+                                            data: true
+                                        })
+                                        rebase.post(`/users/${post.firstUid}/numLosses/${key}`, {
+                                            data: true
+                                        })
                                     }
                                     this.setState(newState)
                                 }} src={post.firstImage} className="imageStyle" />
@@ -82,6 +89,13 @@ class Gallery extends Component {
                                     } else if (newFirstKeys.length === newSecondKeys.length) {
                                         rebase.remove(`/users/${post.firstUid}/numWins/${key}`)
                                         rebase.remove(`/users/${post.secondUid}/numLosses/${key}`)
+                                    } else {
+                                        rebase.post(`/users/${post.firstUid}/numWins/${key}`, {
+                                            data: true
+                                        })
+                                        rebase.post(`/users/${post.secondUid}/numLosses/${key}`, {
+                                            data: true
+                                        })
                                     }
                                     this.setState(newState)
                                 }} src={post.secondImage} className="imageStyle" />
