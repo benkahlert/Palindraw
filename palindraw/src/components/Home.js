@@ -25,7 +25,7 @@ class Home extends Component {
             context: this,
             then: (data) => {
                 const dataArray = Object.keys(data)
-                if (dataArray.length == 1) {
+                if (dataArray.length === 1) {
                     // Nothing in queue
                     rebase.post(`/queue/${this.props.getAppState().user.uid}`, {
                         data: word,

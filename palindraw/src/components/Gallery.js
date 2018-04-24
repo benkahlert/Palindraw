@@ -8,7 +8,8 @@ class Gallery extends Component {
     constructor() {
         super()
         this.state = {
-            posts: { }
+            posts: { },
+            recent: true
         }
     }
 
@@ -40,6 +41,7 @@ class Gallery extends Component {
                                     newState.posts[key].firstLikes[this.props.getAppState().user.uid] = true
                                     if (newState.posts[key].secondLikes[this.props.getAppState().user.uid] === true) {
                                         delete newState.posts[key].secondLikes[this.props.getAppState().user.uid]
+                                        rebase.remove(`/posts/${key}/secondLikes/${this.props.getAppState().user.uid}`)
                                     }
                                     this.setState(newState)
                                 }} src={post.firstImage} className="imageStyle" />
@@ -51,6 +53,7 @@ class Gallery extends Component {
                                     newState.posts[key].secondLikes[this.props.getAppState().user.uid] = true
                                     if (newState.posts[key].firstLikes[this.props.getAppState().user.uid] === true) {
                                         delete newState.posts[key].firstLikes[this.props.getAppState().user.uid]
+                                        rebase.remove(`/posts/${key}/firstLikes/${this.props.getAppState().user.uid}`)
                                     }
                                     this.setState(newState)
                                 }} src={post.secondImage} className="imageStyle" />
@@ -77,8 +80,12 @@ class Gallery extends Component {
                 <div className="row" style={{justifyContent: 'space-between'}}>
                     <p className="text_description" style={{fontSize: '20pt', marginTop: '0px'}}>Voting Gallery</p>
                     <div>
-                        <button className="button" id="galleryModeButton" onClick={this.draw}>Recent</button>
-                        <button className="button" id="galleryModeButton" onClick={this.draw}>My Drawings</button>
+                        <button className="button" id="galleryModeButton" onClick={() => {
+                            this.setState({recent: true})
+                        }}>Recent</button>
+                        <button className="button" id="galleryModeButton" onClick={() => {
+                            this.setState({recent: false})
+                        }}>My Drawings</button>
                     </div>
                 </div>
                 <p className="text_description" id="gameSelector">Vote on Recent Games: Select the drawing that you think best completes the prompt!</p>
