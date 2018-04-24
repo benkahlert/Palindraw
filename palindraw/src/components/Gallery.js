@@ -49,9 +49,13 @@ class Gallery extends Component {
                                         rebase.post(`/users/${post.firstUid}/numWins/${key}`, {
                                             data: true
                                         })
+                                        rebase.post(`/users/${post.secondUid}/numLosses/${key}`, {
+                                            data: true
+                                        })
                                         rebase.remove(`/users/${post.secondUid}/numWins/${key}`)
                                     } else if (newFirstKeys.length === newSecondKeys.length) {
                                         rebase.remove(`/users/${post.secondUid}/numWins/${key}`)
+                                        rebase.remove(`/users/${post.firstUid}/numLosses/${key}`)
                                     }
                                     this.setState(newState)
                                 }} src={post.firstImage} className="imageStyle" />
@@ -64,6 +68,20 @@ class Gallery extends Component {
                                     if (newState.posts[key].firstLikes[this.props.getAppState().user.uid] === true) {
                                         delete newState.posts[key].firstLikes[this.props.getAppState().user.uid]
                                         rebase.remove(`/posts/${key}/firstLikes/${this.props.getAppState().user.uid}`)
+                                    }
+                                    const newFirstKeys = Object.keys(newState.posts[key].firstLikes)
+                                    const newSecondKeys = Object.keys(newState.posts[key].secondLikes)
+                                    if (newSecondKeys.length > newFirstKeys.length) {
+                                        rebase.post(`/users/${post.secondUid}/numWins/${key}`, {
+                                            data: true
+                                        })
+                                        rebase.post(`/users/${post.firstUid}/numLosses/${key}`, {
+                                            data: true
+                                        })
+                                        rebase.remove(`/users/${post.firstUid}/numWins/${key}`)
+                                    } else if (newFirstKeys.length === newSecondKeys.length) {
+                                        rebase.remove(`/users/${post.firstUid}/numWins/${key}`)
+                                        rebase.remove(`/users/${post.secondUid}/numLosses/${key}`)
                                     }
                                     this.setState(newState)
                                 }} src={post.secondImage} className="imageStyle" />
