@@ -45,8 +45,12 @@ class Login extends Component {
             const dataUser = {
                 uid: user.uid,
                 email: this.state.emailAddressValue,
-                numWins: 0,
-                numLosses: 0
+                numWins: {
+                    example: "example"
+                },
+                numLosses: {
+                    example: "example"
+                }
             }
             base.post(`users/${user.uid}`, {
                 data: dataUser

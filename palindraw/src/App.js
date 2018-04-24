@@ -26,7 +26,13 @@ class App extends Component {
             console.log(user)
             const dataUser = {
               uid: user.uid,
-              email: user.email
+              email: user.email,
+              numWins: {
+
+              },
+              numLosses: {
+                
+              }
             }
             this.bindingref = rebase.syncState(`users/${user.uid}`, {
               context: this,

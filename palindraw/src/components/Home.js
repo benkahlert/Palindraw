@@ -68,7 +68,14 @@ class Home extends Component {
             goToUrl: this.props.goToUrl
         }
 
+
         console.log(this.props.getAppState())
+        let winKeys = []
+        let lossKeys = []
+        if (this.props.getAppState().user.numWins) {
+            winKeys = Object.keys(this.props.getAppState().user.numWins)
+            lossKeys = Object.keys(this.props.getAppState().user.numLosses)
+        }
 
         return (
             <div>
@@ -83,10 +90,10 @@ class Home extends Component {
                                             <p className="text_description" id="titleBarName">{this.props.getAppState().user.email}</p>
                                             <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
                                             <div className="statsBox">
-                                                <p className="statsInfo">🎉 {this.props.getAppState().user.numWins}</p>
+                                                <p className="statsInfo">🎉 {winKeys.length - 1}</p>
                                             </div>
                                             <div className="statsBox">
-                                                <p className="statsInfo">😔 {this.props.getAppState().user.numLosses}</p>
+                                                <p className="statsInfo">😔 {lossKeys.length - 1}</p>
                                             </div>
                                             <button className="button" id="signOutButton" onClick={this.signOut}>Sign out</button>
                                         </div>
