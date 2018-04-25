@@ -33,7 +33,7 @@ class Gallery extends Component {
                 <center>
                     <p className="subtitle" id="galleryPostTitle">{post.word}</p>
                     <div className="row" id="galleryPostVotes">
-                        <p className="text_description" id="galleryVotes" style={{marginLeft: '30px'}}>{firstLikesKeys.length - 1} 👍🏼</p>
+                        <p className="text_description" id="galleryVotes" style={{marginLeft: '30px'}}>{firstLikesKeys.length - 1} 👍</p>
                         <div className="row">
                             <div>
                                 <img onClick={() => {
