@@ -12,12 +12,26 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            queue: { }
+            queue: { },
+            width: 0
         }
     }
 
+    componentDidMount = () => {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions = () => {
+        this.setState({width: window.innerWidth});
+    }
+
     draw = () => {
-        
+
         const words = ['Racecar', 'Kayak', 'Noon']
         const word = words[Math.floor(Math.random() * words.length)]
 
@@ -84,6 +98,7 @@ class Home extends Component {
                         return (
                             <div>
                                 <div id="titleBar">
+                                    <p>Width: {this.state.width}</p>
                                     <div className="contentContainer" id="titleBarContent">
                                         <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
                                         <div className="row" id="titleRightInfo">
