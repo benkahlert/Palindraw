@@ -13,7 +13,7 @@ class Draw extends Component {
             radius: 3,
             color: "black",
             canvasSize: 500,
-            timer: 5.0,
+            timer: 20.0,
             timerId: undefined,
             done: false
         }
