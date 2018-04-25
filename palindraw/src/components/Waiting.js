@@ -15,7 +15,7 @@ class Waiting extends Component {
 
     // Set up timer
     componentWillMount = () => {
-        window.addEventListener("beforeunload", this.stop.bind(this))
+        window.addEventListener("beforeunload", this.stop)
         this.listenref = rebase.listenTo(`/queue/${this.props.getAppState().user.uid}`, {
             context: this,
             then: (data) => {
@@ -27,8 +27,9 @@ class Waiting extends Component {
         })
     }
 
-    stop()  {
-        rebase.removeBinding(this.listenref)
+    stop = () =>  {
+        if (this.listenref)
+            rebase.removeBinding(this.listenref)
         this.props.goToUrl("/home")
         rebase.remove(`/queue/${this.props.getAppState().user.uid}`)
     }
