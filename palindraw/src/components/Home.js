@@ -73,6 +73,16 @@ class Home extends Component {
         auth.signOut()
     }
 
+    playButton = () => {
+        if (this.state.width < 700) {
+            return (<div></div>)
+        } else {
+            return (
+                <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
+            )
+        }
+    }
+
     // Mandatory render method
     render() {
 
@@ -81,6 +91,8 @@ class Home extends Component {
             setAppState: this.props.setAppState,
             goToUrl: this.props.goToUrl
         }
+
+        let playButton = this.playButton()
 
 
         console.log(this.props.getAppState())
@@ -98,12 +110,11 @@ class Home extends Component {
                         return (
                             <div>
                                 <div id="titleBar">
-                                    <p>Width: {this.state.width}</p>
                                     <div className="contentContainer" id="titleBarContent">
                                         <p className="title_text" id="homescreenLogo" style={{marginTop: '0px'}}>Palindraw</p>
                                         <div className="row" id="titleRightInfo">
                                             <p className="text_description" id="titleBarName">{this.props.getAppState().user.email}</p>
-                                            <button className="button" id="playButton" onClick={this.draw}>PLAY</button>
+                                            {playButton}
                                             <div className="statsBox">
                                                 <p className="statsInfo">🎉 {winKeys.length - 1}</p>
                                             </div>
