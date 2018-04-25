@@ -8,14 +8,15 @@ class Waiting extends Component {
     constructor() {
         super()
         this.state = {
-            timerId: undefined
+            timerId: undefined,
+            quitter: false
         }
     }
 
     // Set up timer
     componentWillMount = () => {
-        console.log("Mounting waiting")
-        rebase.listenTo(`/queue/${this.props.getAppState().user.uid}`, {
+        window.addEventListener("beforeunload", this.stop)
+        this.listenref = rebase.listenTo(`/queue/${this.props.getAppState().user.uid}`, {
             context: this,
             then: (data) => {
                 if (data !== this.props.getAppState().word) {
@@ -24,6 +25,12 @@ class Waiting extends Component {
                 }
             }
         })
+    }
+
+    stop = () => {
+        rebase.removeBinding(this.listenref)
+        this.props.goToUrl("/home")
+        rebase.remove(`/queue/${this.props.getAppState().user.uid}`)
     }
 
     // Mandatory render method
@@ -37,6 +44,7 @@ class Waiting extends Component {
                 </div>
                 <center>
                     <p className="title_text" style={{marginTop: '70px'}}>Waiting for Another Player</p>
+                    <button className="button" onClick={this.stop}>Quit</button>
                 </center>
             </div>
         )
