@@ -52,6 +52,7 @@ class Gallery extends Component {
                                         rebase.post(`/users/${post.secondUid}/numLosses/${key}`, {
                                             data: true
                                         })
+                                        rebase.remove(`/users/${post.firstUid}/numLosses/${key}`)
                                         rebase.remove(`/users/${post.secondUid}/numWins/${key}`)
                                     } else if (newFirstKeys.length === newSecondKeys.length) {
                                         rebase.remove(`/users/${post.secondUid}/numWins/${key}`)
@@ -85,6 +86,7 @@ class Gallery extends Component {
                                         rebase.post(`/users/${post.firstUid}/numLosses/${key}`, {
                                             data: true
                                         })
+                                        rebase.remove(`/users/${post.secondUid}/numLosses/${key}`)
                                         rebase.remove(`/users/${post.firstUid}/numWins/${key}`)
                                     } else if (newFirstKeys.length === newSecondKeys.length) {
                                         rebase.remove(`/users/${post.firstUid}/numWins/${key}`)
