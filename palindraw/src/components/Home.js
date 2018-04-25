@@ -32,7 +32,8 @@ class Home extends Component {
 
     draw = () => {
 
-        const words = ['Racecar', 'Kayak', 'Noon']
+        const words = ['Racecar', 'Kayak', 'Noon', 'Tenet', 'Wow', 'Rotor', 'Mom', 'My gym', 'Top spot', 'No lemon, no melon',
+        'Level', 'Radar', 'Refer', 'Sexes', 'Rotator']
         const word = words[Math.floor(Math.random() * words.length)]
 
         rebase.fetch(`/queue`, {
