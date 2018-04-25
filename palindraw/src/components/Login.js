@@ -80,7 +80,7 @@ class Login extends Component {
                     <div>
                         <center>
                             <button className="button" onClick={this.createAccount}>Sign up</button>
-                            <button className="button" onClick={this.logIn}>Log in</button>
+                            <button className="button" style={{backgroundColor: '#4BACE1', color: 'white'}} onClick={this.logIn}>Log in</button>
                         </center>
                     </div>
                 </div>
