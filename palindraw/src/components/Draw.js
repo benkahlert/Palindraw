@@ -13,7 +13,7 @@ class Draw extends Component {
             radius: 3,
             color: "black",
             canvasSize: 500,
-            timer: 20.0,
+            timer: 10.0,
             timerId: undefined,
             done: false
         }
@@ -152,7 +152,7 @@ class Draw extends Component {
 
     // Puts a dot at where mouse is
     putPoint = (event, boolean) => {
-        if (this.state.dragging || boolean) {
+        if ((this.state.dragging || boolean) && this.state.timer > 0) {
             this.state.context.lineTo(event.clientX, event.clientY)
             this.state.context.stroke()
             this.state.context.beginPath()
