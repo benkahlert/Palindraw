@@ -102,7 +102,7 @@ class Gallery extends Component {
                                 <p id="text_description" style={{marginTop: '-17px'}}>{post.secondEmail}</p>
                             </div>
                         </div>
-                        <p className="text_description" id="galleryVotes" style={{marginRight: '30px'}}>👍🏼 {secondLikesKeys.length - 1}</p>
+                        <p className="text_description" id="galleryVotes" style={{marginRight: '30px'}}>👍 {secondLikesKeys.length - 1}</p>
                     </div>
                 </center>
 
