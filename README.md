@@ -1,5 +1,4 @@
-# CS252Lab6
-CS252 Lab 6
+# Lab 6 Systems Programming
 
 # Group members:
 Ben Kahlert
